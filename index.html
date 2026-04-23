@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Vista4D: Video Reshooting with 4D Point Clouds">
+  <meta name="description" content="Vista4D: A video reshooting framework grounded in a 4D point cloud. Also enables 4D scene recomposition (point cloud editing) and dynamic scene expansion.">
+  <meta name="keywords" content="Machine learning, computer vision, computer graphics, video generation, 3D/4D reconstruction">
+  <meta name="author" content="Kuan Heng Lin, Zhizheng Liu, Pablo Salamanca, Yash Kant, Ryan Burgert, Yuancheng Xu, Koichi Namekata, Yiwei Zhao, Bolei Zhou, Micah Goldblum, Paul Debevec, Ning Yu">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Netflix Eyeline Labs">
+  <meta property="og:title" content="Vista4D: Video Reshooting with 4D Point Clouds">
+  <meta property="og:description" content="Vista4D: A video reshooting framework grounded in a 4D point cloud. Also enables 4D scene recomposition (point cloud editing) and dynamic scene expansion.">
+  <meta property="og:url" content="https://eyeline-labs.github.io/Vista4D">
+  <meta property="og:image" content="https://eyeline-labs.github.io/Vista4D/media/preview.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="PAPER_TITLE - Research Preview">
+  <meta property="article:published_time" content="2024-01-01T00:00:00.000Z">
+  <meta property="article:author" content="Kuan Heng Lin">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="KEYWORD1">
+  <meta property="article:tag" content="KEYWORD2">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@netflix">
+  <meta name="twitter:creator" content="@kuanhenglin">
+  <meta name="twitter:title" content="Vista4D: Video Reshooting with 4D Point Clouds">
+  <meta name="twitter:description" content="We present Vista4D, a robust and flexible video reshooting framework that grounds the input video and target cameras in a 4D point cloud. Our framework further enables dynamic scene expansion and 4D scene recomposition (point cloud editing).">
+  <meta name="twitter:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
+  <meta name="twitter:image:alt" content="PAPER_TITLE - Research Preview">
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="Vista4D: Video Reshooting with 4D Point Clouds">
+  <meta name="citation_author" content="Lin, Kuan Heng">
+  <meta name="citation_author" content="Liu, Zhizheng">
+  <meta name="citation_author" content="Salamanca, Pablo">
+  <meta name="citation_author" content="Kant, Yash">
+  <meta name="citation_author" content="Burgert, Ryan">
+  <meta name="citation_author" content="Xu, Yuancheng">
+  <meta name="citation_author" content="Namekata, Koichi">
+  <meta name="citation_author" content="Zhao, Yiwei">
+  <meta name="citation_author" content="Zhou, Bolei">
+  <meta name="citation_author" content="Goldblum, Micah">
+  <meta name="citation_author" content="Debevec, Paul">
+  <meta name="citation_author" content="Yu, Ning">
+  <meta name="citation_publication_date" content="2024">
+  <meta name="citation_conference_title" content="CONFERENCE_NAME">
+  <meta name="citation_pdf_url" content="https://YOUR_DOMAIN.com/static/pdfs/paper.pdf">
+
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://documentcloud.adobe.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+  <!-- Browser tab title -->
+  <title>Vista4D: Video Reshooting with 4D Point Clouds</title>
+
+  <!-- Favicon and App Icons -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎥</text></svg>">
+
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+
+  <!-- Fonts -->
+  <style>
+    @font-face {
+      font-family: 'Futura';
+      src: url('fonts/futura/futura_light.ttf') format('truetype');
+      font-weight: 300;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Futura';
+      src: url('fonts/futura/futura_book.ttf') format('truetype');
+      font-weight: 400;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Futura';
+      src: url('fonts/futura/futura_medium.ttf') format('truetype');
+      font-weight: 500;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Futura';
+      src: url('fonts/futura/futura_demi.ttf') format('truetype');
+      font-weight: 600;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Futura';
+      src: url('fonts/futura/futura_bold.ttf') format('truetype');
+      font-weight: 700;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Futura';
+      src: url('fonts/futura/futura_extrabold.ttf') format('truetype');
+      font-weight: 800;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Futura';
+      src: url('fonts/futura/futura_heavy.ttf') format('truetype');
+      font-weight: 900;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'JetBrains Mono';
+      src: url('fonts/jetbrainsmono/jetbrainsmono_regular.ttf') format('truetype');
+      font-weight: 400;
+      font-display: swap;
+    }
+  </style>
+
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+
+  <!-- Structured Data for Academic Papers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "Vista4D: Video Reshooting with 4D Point Clouds",
+    "description": "BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS",
+    "author": [
+      {"@type": "Person", "name": "Kuan Heng Lin", "affiliation": [{"@type": "Organization", "name": "Eyeline Labs"}, {"@type": "Organization", "name": "Columbia University"}]},
+      {"@type": "Person", "name": "Zhizheng Liu", "affiliation": [{"@type": "Organization", "name": "Eyeline Labs"}, {"@type": "Organization", "name": "University of California, Los Angeles"}]},
+      {"@type": "Person", "name": "Pablo Salamanca", "affiliation": [{"@type": "Organization", "name": "Eyeline Labs"}, {"@type": "Organization", "name": "Netflix"}]},
+      {"@type": "Person", "name": "Yash Kant", "affiliation": [{"@type": "Organization", "name": "Eyeline Labs"}, {"@type": "Organization", "name": "Netflix"}]},
+      {"@type": "Person", "name": "Ryan Burgert", "affiliation": [{"@type": "Organization", "name": "Eyeline Labs"}, {"@type": "Organization", "name": "Netflix"}, {"@type": "Organization", "name": "Stony Brook University"}]},
+      {"@type": "Person", "name": "Yuancheng Xu", "affiliation": [{"@type": "Organization", "name": "Eyeline Labs"}, {"@type": "Organization", "name": "Netflix"}]},
+      {"@type": "Person", "name": "Koichi Namekata", "affiliation": [{"@type": "Organization", "name": "Eyeline Labs"}, {"@type": "Organization", "name": "Netflix"}, {"@type": "Organization", "name": "University of Oxford"}]},
+      {"@type": "Person", "name": "Yiwei Zhao", "affiliation": [{"@type": "Organization", "name": "Netflix"}]},
+      {"@type": "Person", "name": "Bolei Zhou", "affiliation": [{"@type": "Organization", "name": "University of California, Los Angeles"}]},
+      {"@type": "Person", "name": "Micah Goldblum", "affiliation": [{"@type": "Organization", "name": "Columbia University"}]},
+      {"@type": "Person", "name": "Paul Debevec", "affiliation": [{"@type": "Organization", "name": "Eyeline Labs"}, {"@type": "Organization", "name": "Netflix"}]},
+      {"@type": "Person", "name": "Ning Yu", "affiliation": [{"@type": "Organization", "name": "Eyeline Labs"}, {"@type": "Organization", "name": "Netflix"}]}
+    ],
+    "datePublished": "2024-01-01",
+    "publisher": {
+      "@type": "Organization",
+      "name": "CONFERENCE_OR_JOURNAL_NAME"
+    },
+    "url": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE",
+    "image": "https://YOUR_DOMAIN.com/static/images/social_preview.png",
+    "keywords": ["KEYWORD1", "KEYWORD2", "KEYWORD3", "machine learning", "computer vision"],
+    "abstract": "FULL_ABSTRACT_TEXT_HERE",
+    "citation": "BIBTEX_CITATION_HERE",
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "mainEntity": {
+      "@type": "WebPage",
+      "@id": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE"
+    },
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "RESEARCH_AREA_1"
+      },
+      {
+        "@type": "Thing",
+        "name": "RESEARCH_AREA_2"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Website/Organization Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "INSTITUTION_OR_LAB_NAME",
+    "url": "https://YOUR_INSTITUTION_WEBSITE.com",
+    "logo": "https://YOUR_DOMAIN.com/static/images/favicon.ico",
+    "sameAs": [
+      "https://twitter.com/YOUR_TWITTER_HANDLE",
+      "https://github.com/YOUR_GITHUB_USERNAME"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <main id="main-content">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title"><span class="title-main">Vista4D</span><span class="title-sub">Video Reshooting with 4D Point Clouds</span></h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://kuanhenglin.github.io" target="_blank">Kuan Heng Lin</a><sup>1,3&lowast;</sup></span>
+              <span class="author-block">
+                <a href="https://bosmallear.github.io" target="_blank">Zhizheng Liu</a><sup>1,4&lowast;</sup></span>
+              <span class="author-block">
+                <a href="https://pablosalaman.ca" target="_blank">Pablo Salamanca</a><sup>1,2</sup></span>
+              <span class="author-block">
+                <a href="https://yashkant.github.io" target="_blank">Yash Kant</a><sup>1,2</sup></span>
+              <span class="author-block">
+                <a href="https://ryanndagreat.github.io" target="_blank">Ryan Burgert</a><sup>1,2,5&lowast;</sup></span>
+              <span class="author-block">
+                <a href="https://yuancheng-xu.github.io" target="_blank">Yuancheng Xu</a><sup>1,2</sup></span>
+              <span class="author-block">
+                <a href="https://kmcode1.github.io" target="_blank">Koichi Namekata</a><sup>1,2,6&lowast;</sup></span>
+              <span class="author-block">
+                <a href="https://zhaoyw007.github.io" target="_blank">Yiwei Zhao</a><sup>2</sup></span>
+              <span class="author-block">
+                <a href="https://boleizhou.github.io" target="_blank">Bolei Zhou</a><sup>4</sup></span>
+              <span class="author-block">
+                <a href="https://goldblum.github.io" target="_blank">Micah Goldblum</a><sup>3</sup></span>
+              <span class="author-block">
+                <a href="https://www.pauldebevec.com" target="_blank">Paul Debevec</a><sup>1,2</sup></span>
+              <span class="author-block">
+                <a href="https://ningyu1991.github.io" target="_blank">Ning Yu</a><sup>1,2</sup></span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Eyeline Labs</span>
+              <span class="author-block"><sup>2</sup>Netflix</span>
+              <span class="author-block"><sup>3</sup>Columbia University</span>
+              <span class="author-block"><sup>4</sup>UCLA</span>
+              <span class="author-block"><sup>5</sup>Stony Brook University</span>
+              <span class="author-block"><sup>6</sup>University of Oxford</span>
+              <span class="author-note"><small><br><sup>&lowast;</sup>Work done during an internship at Eyeline Labs</small></span>
+            </div>
+            <div class="publication-venue-title">CVPR 2026 Highlight</div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                      <span class="link-block">
+                        <a href="https://arxiv.org/pdf/2604.21915" target="_blank"
+                        class="external-link button is-medium is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+
+                  <span class="link-block">
+                    <a href="https://github.com/Eyeline-Labs/Vista4D" target="_blank"
+                    class="external-link button is-medium is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2604.21915" target="_blank"
+                  class="external-link button is-medium is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container is-max-desktop">
+      <video poster="" id="tree" autoplay controls muted loop height="100%" preload="metadata" style="width: 100%; margin-top: 1.5rem;">
+        <source src="https://media.githubusercontent.com/media/Eyeline-Labs/Vista4D/website/media/vista4d.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+
+<!-- Paper abstract -->
+<section class="section hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Overview</h2>
+        <div class="content has-text-justified">
+          <p>
+            <b>Vista4D</b> is a video reshooting framework which synthesizes the dynamic scene represented by an input source video from novel camera trajectories and viewpoints. We bridge the distribution shift between training and inference for point-cloud-grounded video reshooting, as Vista4D is robust to point cloud artifacts from imprecise 4D reconstruction of real-world videos by training on noisy, reconstructed multiview videos. Our 4D point cloud with temporally-persistent static points also explicitly preserves scene content and improved camera control. Vista4D generalizes to real-world applications such as dynamic scene expansion (casual video capture of scene as background reference), 4D scene recomposition (point cloud editing), and long video inference with memory.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<!-- Video reshooting -->
+<section class="section hero">
+  <h2 class="title is-3">Video reshooting</h2>
+  <div class="carousel carousel-two-up">
+        <div class="carousel-track">
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/ours_snowboard_back-follow_s52106.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/ours_mountain-hike_truck-crane-below_s13335.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/ours_couple-newspaper_between-heads_s56468.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/ours_selfie-four_crane-out_s11337.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/ours_dance-twirl_right-left_s48600.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/ours_phone-talk_left-arc_s75890.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/ours_camel_zoom-out_s20081.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/ours_bed-shopping_top-arc_s88051.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/ours_info-read_dolly-zoom_s47258.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/ours_snow-dog_left-right-arc_s76820.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/ours_hike_dolly-in_s75501.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/ours_magnifying-glass_man-book-three_s36846.mp4" type="video/mp4"></video>
+          </div></div>
+        </div>
+        <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+        <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+        <div class="carousel-dots"></div>
+  </div>
+</section>
+<!-- End video reshooting -->
+
+<!-- Comparison to baselines -->
+<section class="section hero">
+  <h2 class="title is-3">Comparison to baselines</h2>
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <p>We show qualitative comparisons of Vista4D to baseline methods on a variety of real-world monocular videos and target cameras.</p>
+    </div>
+  </div>
+  <div class="carousel">
+        <div class="carousel-track">
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/comp_bmx-bumps_front-follow_s41875_1.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/comp_couple-walk_front-follow_s38317_1.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/comp_soapbox_side-truck_s85173_1.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/comp_golf_dolly-in_s82485_1.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/comp_goat_truck-dolly-zoom_s79577_1.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/comp_woman-beach_front-follow_s95710_1.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/comp_park-selfie_front-pedestal_s47557_1.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/comp_funeral-procession_side-truck_s25173_1.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/comp_basketball-four_shoulder-out_s97762_1.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/comp_drive-desert_back-follow_s89547_1.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/comp_truck-pose_left-right_s44473_1.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/comp_car-roundabout_front-follow_s37053_1.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/comp_elderly-tennis_full-arc_s37102_1.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/comp_martian-flag_front-follow_s42677_1.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/comp_snow-bike_side-truck_s19468_1.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/comp_women-talk_crane-below_s63309_1.mp4" type="video/mp4"></video>
+          </div></div>
+        </div>
+        <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+        <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+        <div class="carousel-dots"></div>
+  </div>
+</section>
+<!-- End comparison to baselines -->
+
+<!-- 4D scene recomposition -->
+<section class="section hero">
+  <h2 class="title is-3">4D scene recomposition</h2>
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <p>We directly edit the 4D point cloud to manipulate the dynamic scene. To prevent conditioning conflicts between the <i>unedited</i> input source video (column 1) and render of the <i>edited</i> point cloud (column 3), we instead condition on the <i>edited</i> source video (column 2) which is just the edited point cloud rendered from the source cameras without static pixel temporal persistence.</p>
+    </div>
+  </div>
+  <div class="carousel">
+        <div class="carousel-track">
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/edit_couple-hug.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/edit_funeral-procession.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/edit_hike.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/edit_swing.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/edit_golf.mp4" type="video/mp4"></video>
+          </div></div>
+        </div>
+        <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+        <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+        <div class="carousel-dots"></div>
+  </div>
+</section>
+<!-- End 4D scene recomposition -->
+
+<!-- Dynamic scene expansion -->
+<section class="section hero">
+  <h2 class="title is-3">Dynamic scene expansion</h2>
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <p>We jointly reconstruct the source video and the casual scene capture to form a 4D point cloud that contains (static) scene information beyond the source video, which grounds the model's generative priors to the real-world capture and improves camera accuracy. We show inference without (top) and with (bottom) this casual scene capture, along with their corresponding point cloud render conditions.</p>
+    </div>
+  </div>
+  <div class="carousel">
+        <div class="carousel-track">
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/dse_lounge-man-4_arc-right-left_s65991.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/dse_lounge-man-4_dolly-in_s94357.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/dse_room-man-1_arc-left_s38238.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/dse_room-man-1_dolly-out_s38238.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/dse_building-woman-1_arc-right-left_s13837.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/dse_conference-pair-2_dolly-in_s38493.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/dse_hall-man-1_arc-right-left_s32014.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/dse_hall-man-1_left-follow_s70168.mp4" type="video/mp4"></video>
+          </div></div>
+        </div>
+        <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+        <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+        <div class="carousel-dots"></div>
+  </div>
+</section>
+<!-- End dynamic scene expansion -->
+
+<!-- Long video inference -->
+<section class="section hero">
+  <h2 class="title is-3">Long video inference</h2>
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <p>We chunk the source video into clips and run inference clip-by-clip. To explicitly preserve generated content, we continuously integrate the point cloud from the newly generated video clip into the existing one after each inference pass. This is visualized in the point cloud render below, where the point cloud grows after each clip. To ensure seamless transition between each clip, we run inference with a Vista4D checkpoint trained from a separate image-to-video model (our main checkpoint is trained from a text-to-video model).</p>
+    </div>
+  </div>
+  <div class="carousel">
+        <div class="carousel-track">
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/long_money-count.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/long_measure-temp.mp4" type="video/mp4"></video>
+          </div></div>
+          <div class="item"><div class="item-inner">
+            <video autoplay muted loop playsinline><source data-src="media/long_office-file.mp4" type="video/mp4"></video>
+          </div></div>
+        </div>
+        <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+        <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+        <div class="carousel-dots"></div>
+  </div>
+</section>
+<!-- End long video inference -->
+
+<!-- Ablations (collapsible) -->
+<section class="section hero" id="ablations">
+  <div class="collapsible-header" onclick="toggleCollapsible(this)">
+    <h2 class="title is-3">Ablations <span class="collapsible-icon">&#x25B8;</span></h2>
+    <span class="collapsible-hint">Click to expand</span>
+  </div>
+  <div class="collapsible-content">
+    <div class="container is-max-desktop">
+      <div class="content has-text-justified">
+        <p>We show samples for ablations on no depth artifacts &amp; source video conditioning and no temporal persistence. All ablations, including ones from our full method "<b>Vista4D (ours)</b>", are from checkpoints with fewer training steps than the final 672&times;384 checkpoint.</p>
+      </div>
+    </div>
+
+    <h3 class="title is-4" style="text-align:center; margin-top:1.5rem;">No depth artifacts &amp; source video conditioning</h3>
+    <div class="container is-max-desktop">
+      <div class="content has-text-justified">
+        <p>We show samples of our method with ablations on the following design choices:</p>
+        <ol type="I">
+          <li><b>No source video:</b> We take away source video conditioning and only condition on the point cloud render.</li>
+          <li><b>Source video via cross-attention:</b> Instead of in-context conditioning (<i>i.e.</i>, self-attention through frame concatenation), we condition the source video via cross-attention following TrajectoryCrafter.</li>
+          <li><b>No depth artifacts:</b> For the multiview dynamic dataset (MultiCamVideo dataset from ReCamMaster), instead of the point cloud render being rendered the source video in the cameras of the target video (main paper, Figure 3(b)), we always do double reprojection (main paper, Figure 3(a)) to remove depth artifacts so the point cloud render is always spatially aligned with the target video.</li>
+          <li><b>No depth artifacts + no source video:</b> Combination of <b>II</b> and <b>I</b>.</li>
+          <li><b>No depth artifacts + source cross-attn:</b> Combination of <b>III</b> and <b>I</b>.</li>
+        </ol>
+        <p>We observe two major artifacts/problems when we remove depth artifacts and/or source video conditioning during training:</p>
+        <ol type="1">
+          <li><b>Geometry artifacts from imprecise depth estimation:</b> The model is unable to correct obvious depth estimation artifacts and thus produce output artifacts.</li>
+          <li><b>Temporal jittering:</b> One artifact of real-world depth estimation/4D reconstruction is temporal jittering of the resulting point cloud. Here, the model is unable to correct this jittering.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="carousel">
+      <div class="carousel-track">
+        <div class="item"><div class="item-inner">
+          <video autoplay muted loop playsinline><source data-src="media/ab_das_car-roundabout_crane-above_s13442.mp4" type="video/mp4"></video>
+          <p class="subtitle">This sample exemplifies <b>1</b>, where the 4D reconstruction artifacts on the car carried over to all ablations, except (b) where cross-attention was unable to properly transfer the car's geometry while ensuring its correct size with the camera flying back.</p>
+        </div></div>
+        <div class="item"><div class="item-inner">
+          <video autoplay muted loop playsinline><source data-src="media/ab_das_man-smoke_front-dolly-in_s48716.mp4" type="video/mp4"></video>
+          <p class="subtitle">This sample also shows <b>1</b>, where every ablation (a) to (e) displays artifacts from depth estimation, especially around the man's right arm and hand. We also see slight <b>2</b> with all the ablations with the man jittering left and right due to depth temporal jittering.</p>
+        </div></div>
+        <div class="item"><div class="item-inner">
+          <video autoplay muted loop playsinline><source data-src="media/ab_das_mountain-man_left-right_s19903.mp4" type="video/mp4"></video>
+          <p class="subtitle">This sample exemplifies <b>2</b>, where (a), (c), (d), and (e) all show significant temporal jittering on the man due jittering depths. Though (b) has no jittering, the source video was not well preserved via cross-attention, where the man is not taking his hand off his hat half way through and exhibits noticeably brighter and more saturated colors compared to the source video.</p>
+        </div></div>
+        <div class="item"><div class="item-inner">
+          <video autoplay muted loop playsinline><source data-src="media/ab_das_goat_crane-above_s75762.mp4" type="video/mp4"></video>
+          <p class="subtitle">We see both <b>1</b> and <b>2</b> here. (a), (b), (d), and (e) show either geometry artifacts on the goat (or in the case of (b) where cross-attention was unable to accurately transfer the geometry/appearance of the goat), and (a), (c), (d), and (e) show noticeable to significant temporal jittering.</p>
+        </div></div>
+      </div>
+      <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+      <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+      <div class="carousel-dots"></div>
+    </div>
+
+    <h3 class="title is-4" style="text-align:center; margin-top:1.5rem;">No temporal persistence</h3>
+    <div class="container is-max-desktop">
+      <div class="content has-text-justified">
+        <p>We show samples of our method trained with and without point cloud static pixel temporal persistence, and we also show the corresponding point cloud conditioning with or without temporal persistence. We observe two major artifacts/problems when we remove temporal persistence:</p>
+        <ol type="1">
+          <li><b>Not preserving seen (static) content:</b> The model struggles to preserve seen content from the source video.</li>
+          <li><b>Imprecise camera control:</b> The model has less accurate camera control during target camera frames which have little overlap with the source video point cloud.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="carousel carousel-three-quarter">
+      <div class="carousel-track">
+        <div class="item"><div class="item-inner">
+          <video autoplay muted loop playsinline><source data-src="media/ab_tp_parkour_opp-pan_s40962.mp4" type="video/mp4"></video>
+          <p class="subtitle">This sample showcases <b>1</b>, where the no-temporal-persistence model struggles to preserve the right side of the scene. There are also symptoms of <b>2</b> where cameras at the end of the video moves forward slightly instead of panning and moving to the side per the point cloud render.</p>
+        </div></div>
+        <div class="item"><div class="item-inner">
+          <video autoplay muted loop playsinline><source data-src="media/ab_tp_bmx-bumps_front-follow_s58813.mp4" type="video/mp4"></video>
+          <p class="subtitle">This sample shows <b>2</b>, where the no-temporal-persistence model just has strange, floaty cameras from the reduced camera information from the per-frame point cloud. Partly due to this, the BMX rider also has strange motion with geometry artifacts.</p>
+        </div></div>
+        <div class="item"><div class="item-inner">
+          <video autoplay muted loop playsinline><source data-src="media/ab_tp_hike_front-follow_s89120.mp4" type="video/mp4"></video>
+          <p class="subtitle">This sample shows <b>2</b>, where the no-temporal-persistence model does not replicate the point cloud render's camera dolly-out smoothly and also jitters. The hiker also shows geometry artifacts.</p>
+        </div></div>
+        <div class="item"><div class="item-inner">
+          <video autoplay muted loop playsinline><source data-src="media/ab_tp_snowboard_side-truck_s11185.mp4" type="video/mp4"></video>
+          <p class="subtitle">This sample encompasses both <b>1</b> and <b>2</b>, where the no-temporal-persistence model struggles to faithfully synthesize the snow and rock mountain behind the snowboarder as the per-frame point cloud render never explicitly sees it. The camera is also inaccurate throughout the video, especially the beginning, and the motion of the snowboarder is also strange and seemingly floating on top of the snow.</p>
+        </div></div>
+      </div>
+      <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+      <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+      <div class="carousel-dots"></div>
+    </div>
+  </div>
+</section>
+<!-- End ablations -->
+
+<!-- Acknowledgements -->
+<section class="section hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Acknowledgements</h2>
+        <div class="content has-text-justified">
+          <p>
+            We would like to thank Aleksander Hołyński, Wenqi Xian, Dan Zheng, Mohsen Mousavi, Li Ma, and Lingxiao Li for their technical discussions; Ryan Tabrizi, Tianyi Lorena Yan, and Shreyas Havaldar for appearing in our demo videos; Lukas Lepicovsky, David Rhodes, Nhat Phong Tran, Dacklin Young, and Johnson Thomasson for their production support; Jeffrey Shapiro, Ritwik Kumar, and Hossein Taghavi for their executive support; Jennifer Lao and Lianette Alnaber for their operational support.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End acknowledgements -->
+
+<!--BibTex citation -->
+  <section class="section hero" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-header">
+        <h2 class="title">BibTeX</h2>
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <pre id="bibtex-code"><code>@inproceedings{lin2026vista4d,
+    author = {Lin, {Kuan Heng} and Liu, Zhizheng and Salamanca, Pablo and Kant, Yash and Burgert, Ryan and Namekata, Koichi and Zhao, Yiwei and Zhou, Bolei and Goldblum, Micah and Debevec, Paul and Yu, Ning},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+    title = {{Vista4D}: Video Reshooting with 4D Point Clouds},
+    year = {2026}
+}</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built on top of the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+
+<!-- Default Statcounter code for Vista4D https://eyeline-labs.github.io/Vista4D
+-->
+<script type="text/javascript">
+var sc_project=13223915;
+var sc_invisible=1;
+var sc_security="877bdbb9";
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js" async></script>
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="https://statcounter.com/" target="_blank"><img class="statcounter"
+src="https://c.statcounter.com/13223915/0/877bdbb9/1/" alt="Web Analytics"
+referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+<!-- End of Statcounter Code -->
+
+<!-- End of Statcounter Code -->
+
+</body>
+</html>
