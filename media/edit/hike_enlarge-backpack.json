@@ -1,0 +1,25 @@
+{
+  "edits": [
+    {
+      "target": {
+        "kind": "existing",
+        "prompt": "backpack"
+      },
+      "ops": [
+        {
+          "op": "translate",
+          "params": [
+            0.1,
+            -0.12,
+            0
+          ]
+        },
+        {
+          "op": "scale",
+          "params": 2
+        }
+      ],
+      "scope": "frame"
+    }
+  ]
+}

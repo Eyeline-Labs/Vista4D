@@ -1,0 +1,29 @@
+{
+  "edits": [
+    {
+      "target": {
+        "kind": "duplicate",
+        "prompt": "car, car trunk"
+      },
+      "ops": [
+        {
+          "op": "translate",
+          "params": [
+            1.5,
+            0,
+            1
+          ]
+        },
+        {
+          "op": "rotate",
+          "params": [
+            0,
+            45,
+            0
+          ]
+        }
+      ],
+      "scope": "global"
+    }
+  ]
+}

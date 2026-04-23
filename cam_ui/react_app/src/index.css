@@ -1,0 +1,76 @@
+/* ============================================================
+ * Futura
+ * ============================================================ */
+@font-face {
+  font-family: 'Futura';
+  src: url('../../fonts/futura/futura_light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Futura';
+  src: url('../../fonts/futura/futura_book.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Futura';
+  src: url('../../fonts/futura/futura_medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Futura';
+  src: url('../../fonts/futura/futura_demi.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============================================================
+ * JetBrains Mono
+ * ============================================================ */
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../../fonts/jetbrainsmono/jetbrainsmono_regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --ui-font:   'Futura', Arial, sans-serif;
+  --mono-font: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+body {
+  margin: 0;
+  font-family: var(--ui-font);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+code, pre, .path-text, .matrix-display, .matrix-cell {
+  font-family: var(--mono-font);
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}

@@ -1,0 +1,12 @@
+Store Wan Video checkpoints here! The folder structure from the repository root should look like:
+...
+checkpoints/
+    vista4d/
+        384p49_step=30000/
+            config.yaml
+            dit.pth
+        [resolution]p[num_frames]_step=[steps]/
+    wan/  # We are here
+        Wan2.1-T2V-14B/
+            ...
+...

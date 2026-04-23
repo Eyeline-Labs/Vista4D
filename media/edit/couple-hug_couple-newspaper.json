@@ -1,0 +1,34 @@
+{
+  "edits": [
+    {
+      "target": {
+        "kind": "insert",
+        "prompt": "man, woman, newspaper, bench",
+        "source": "results/edit/couple-newspaper/recon_and_seg"
+      },
+      "ops": [
+        {
+          "op": "translate",
+          "params": [
+            1.4,
+            -0.1,
+            1.2
+          ]
+        },
+        {
+          "op": "rotate",
+          "params": [
+            0,
+            20,
+            0
+          ]
+        },
+        {
+          "op": "scale",
+          "params": 1.1
+        }
+      ],
+      "scope": "global"
+    }
+  ]
+}

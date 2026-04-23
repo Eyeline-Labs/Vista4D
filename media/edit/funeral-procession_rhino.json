@@ -1,0 +1,34 @@
+{
+  "edits": [
+    {
+      "target": {
+        "kind": "insert",
+        "prompt": "rhino",
+        "source": "results/edit/rhino/recon_and_seg"
+      },
+      "ops": [
+        {
+          "op": "translate",
+          "params": [
+            -0.5,
+            -0.7,
+            -8
+          ]
+        },
+        {
+          "op": "scale",
+          "params": 1.2
+        },
+        {
+          "op": "rotate",
+          "params": [
+            0,
+            20,
+            0
+          ]
+        }
+      ],
+      "scope": "global"
+    }
+  ]
+}

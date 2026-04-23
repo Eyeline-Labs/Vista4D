@@ -1,0 +1,24 @@
+.app-header {
+  padding: 1.0rem;
+  border-bottom: 1px solid #333;
+  background-color: #000000;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+}
+
+.app-header-content {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.app-title {
+  font-family: var(--ui-font);
+  font-weight: 500;
+  margin: 0;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  padding: 0;
+}

@@ -1,0 +1,20 @@
+{
+  "edits": [
+    {
+      "target": {
+        "kind": "existing",
+        "prompt": "priest"
+      },
+      "ops": [
+        {
+          "op": "remove"
+        }
+      ],
+      "scope": "global",
+      "mask_expansion": [
+        6,
+        4
+      ]
+    }
+  ]
+}

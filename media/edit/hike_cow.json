@@ -1,0 +1,30 @@
+{
+  "edits": [
+    {
+      "target": {
+        "kind": "insert",
+        "prompt": "cow",
+        "source": "results/edit/cow/recon_and_seg"
+      },
+      "ops": [
+        {
+          "op": "translate",
+          "params": [
+            0.8,
+            -0.25,
+            -3.5
+          ]
+        },
+        {
+          "op": "rotate",
+          "params": [
+            5,
+            -20,
+            0
+          ]
+        }
+      ],
+      "scope": "global"
+    }
+  ]
+}

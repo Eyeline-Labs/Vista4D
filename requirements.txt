@@ -1,0 +1,36 @@
+# DiffSynth-Studio
+accelerate
+einops
+ftfy
+modelscope
+imageio[ffmpeg]
+pandas
+peft
+protobuf
+safetensors
+sentencepiece
+transformers==4.57.6  # transformers>=5 will break DA3
+# Vista4D
+matplotlib
+opencv-python-headless
+openexr
+# Depth Anything 3 (minimal dependencies for our use)
+addict
+e3nn
+evo
+moviepy==1.0.3
+omegaconf
+pycolmap
+plyfile
+trimesh
+xformers
+# Segment Anything 3 (minimal dependencies for our use)
+decord
+iopath
+kernels
+pycocotools
+timm
+# Camera UI
+fastapi
+uvicorn[standard]
+viser

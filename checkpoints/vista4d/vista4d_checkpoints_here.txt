@@ -1,0 +1,12 @@
+Store Vista4D checkpoint(s) here! The folder structure from the repository root should look like:
+...
+checkpoints/
+    vista4d/  # We are here
+        384p49_step=30000/
+            config.yaml
+            dit.pth
+        [resolution]p[num_frames]_step=[steps]/
+    wan/
+        Wan2.1-T2V-14B/
+            ...
+...

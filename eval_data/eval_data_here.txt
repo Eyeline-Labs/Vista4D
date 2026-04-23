@@ -1,0 +1,29 @@
+Store Vista4D evaluation data here! The folder structure from the repository root should look like:
+...
+eval_data/
+    metadata.csv
+    recon_and_seg/  # 4D reconstruction and dynamic mask segmentation
+        avocado-slice/
+            cameras.npz  # Source intrinsics and extrinsics
+            video.mp4
+            depths/
+                00001.exr
+                ...
+            dynamic_mask/
+                00001.png
+                ...
+            sky_mask/  # Sky segmentation (to set them to a large depth)
+                00001.png
+                ...
+        [video_name]/
+            ...
+        ...
+    cameras/
+        avocado-slice/  # Two to three target cameras per video
+            close-crane-above.npz
+            left-front-zoom.npz
+        [video_name]/
+            [camera_name].npz
+            ...
+        ...
+...
