@@ -90,6 +90,8 @@ b, strong {
 
 .link-block a {
     margin: 8px 4px;
+    min-width: 8rem;
+    justify-content: center;
 }
 
 .dnerf {
@@ -133,6 +135,7 @@ b, strong {
 
 .title-main {
     display: block;
+    position: relative;
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
@@ -140,10 +143,23 @@ b, strong {
     font-weight: 700 !important;
     font-size: 1.5em;
     line-height: 1;
-    background: linear-gradient(135deg, #f06292, #ff7043, #ffca28, #66bb6a, #42a5f5, #ab47bc);
+    background: linear-gradient(to right, #dd6085, #38689c);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+}
+
+.title-main::before {
+    content: "Vista4D";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, #e8bc1e, #4db03c);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-mask-image: linear-gradient(to bottom, black, transparent);
+    mask-image: linear-gradient(to bottom, black, transparent);
+    pointer-events: none;
 }
 
 .title-sub {
