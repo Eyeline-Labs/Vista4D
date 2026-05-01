@@ -10,7 +10,7 @@ from utils.misc import cleanup
 
 
 def init_sam3_video():
-    print(f"Loading Segment Anything 3 model (from official implementation/repo).")
+    print("Loading Segment Anything 3 model (from official implementation/repo).")
     video_predictor = build_sam3_video_predictor()
     return video_predictor
 
