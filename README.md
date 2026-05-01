@@ -20,7 +20,7 @@
 
 ![Vista4D teaser figure](media/docs/teaser.jpg)
 
-**Vista4D** is a *video reshooting* framework which synthesizes the dynamic scene represented by an input source video from novel camera trajectories and viewpoints. We bridge the distribution shift between training and inference for point-cloud-grounded video reshooting, as Vista4D is robust to point cloud artifacts from imprecise 4D reconstruction of real-world videos by training on noisy, reconstructed multiview videos. Our 4D point cloud with temporally-persistent static points also explicitly preserves scene content and improved camera control. Vista4D generalizes to real-world applications such as dynamic scene expansion (casual video capture of scene as background reference), 4D scene recomposition (point cloud editing), and long video inference with memory.
+**Vista4D** is a *video reshooting* framework which synthesizes the dynamic scene represented by an input source video from novel camera trajectories and viewpoints. We bridge the distribution shift between training and inference for point-cloud-grounded video reshooting, as Vista4D is robust to point cloud artifacts from imprecise 4D reconstruction of real-world videos by training on noisy, reconstructed multiview videos. Our 4D point cloud with temporally-persistent static points also explicitly preserves scene content and improves camera control. Vista4D generalizes to real-world applications such as dynamic scene expansion (casual video capture of scene as background reference), 4D scene recomposition (point cloud editing), and long video inference with memory.
 
 This repository contains the following:
 
@@ -99,11 +99,11 @@ EXAMPLE=couple-newspaper RECON_METHOD=pi3 bash scripts/preprocess/example_recon_
 ```
 We have provided eight (8) example videos, `couple-newspaper`, `couple-walk`, `elderly-tennis`, `mountain-hike`, `park-selfie`, `parkour`, `snowboard`, and `soapbox` (all from our evaluation dataset and provided in `./media/single/`) which you configure through `EXAMPLE`. You can also pick from Pi3X (`pi3`) or DA3 (`da3`) as your 4D reconstruction method through `RECON_METHOD`, though our provided target cameras are designed with Pi3X's reconstruction. The reconstruction and segmentation results and visualization will be found in `./results/single/$EXAMPLE/recon_and_seg/` after running the script.
 
-Our default reconstruction method is Pi3X, as we find it to contains less temporal flickering and geometric artifacts than DA3 while using less VRAM. However, DA3 supports a higher base resolution than Pi3(X), which can be useful for highly detailed source videos.
+Our default reconstruction method is Pi3X, as we find that it contains less temporal flickering and geometric artifacts than DA3 while using less VRAM. However, DA3 supports a higher base resolution than Pi3(X), which can be useful for highly detailed source videos.
 
 ### Camera UI (optional)
 
-We include an interactive camera design UI for designing your own target cameras to use as input to `render_single.py`, though we provide an example one made with this exact UI for each example video in `./media/single/`. It visualizes the loaded 4D reconstruction as a navigable 4D point cloud, capture keyframe camera poses and zooms at desired positions, and export the interpolated target cameras as a `.npz` file ready for point cloud rendering. (Our camera UI also supports point cloud editing/4D scene recomposition, which we detail later.)
+We include an interactive camera design UI for designing your own target cameras to use as input to `render_single.py`, though we provide an example one made with this exact UI for each example video in `./media/single/`. It visualizes the loaded 4D reconstruction as a navigable 4D point cloud, captures keyframe camera poses and zooms at desired positions, and exports the interpolated target cameras as a `.npz` file ready for point cloud rendering. (Our camera UI also supports point cloud editing/4D scene recomposition, which we detail later.)
 
 Our camera design UI is built on top of [Viser](https://viser.studio), which runs as a Python/FastAPI backend paired with a React frontend. Node.js is required for the React frontend, and you can install it with
 ```bash
@@ -141,7 +141,7 @@ https://<react-random-words>.trycloudflare.com/?viser=https://<viser-random-word
 The UI reads `?viser=` on page load and points the iframe at that URL; without the query param it falls back to `http://localhost:9997` (the normal local-machine / SSH-forwarded case). The FastAPI backend does not need its own tunnel since it is proxied through the React frontend via `/api/`.
 </details>
 
-**Camera UI usage:** Enter the path to a `recon_and_seg` output folder (e.g., `results/single/couple-newspaper/recon_and_seg/`) in the *Folder path* field and click **Load**. Once loaded, navigate the 3D point cloud in the Viser viewport: WASD + Q/E for translation and mouse drag for rotation. (Due to Viser limitations, our UI doesn't support camera roll, only pitch/tilt and yaw/pan for rotations.) You can play and pause the video/point cloud, or you can manually scrub the timeline frames. When you selected a frame you want as a keyframe, click **Capture current view** and also set your zoom there. When satisfied with the target cameras (which you can preview with **Auto-follow camera** during playback), click **Export cameras** to write the interpolated camera path to `cam_ui/exported_cameras/output_cameras.npz` (which is customizable in *Output filename*).
+**Camera UI usage:** Enter the path to a `recon_and_seg` output folder (e.g., `results/single/couple-newspaper/recon_and_seg/`) in the *Folder path* field and click **Load**. Once loaded, navigate the 3D point cloud in the Viser viewport: WASD + Q/E for translation and mouse drag for rotation. (Due to Viser limitations, our UI doesn't support camera roll, only pitch/tilt and yaw/pan for rotations.) You can play and pause the video/point cloud, or you can manually scrub the timeline frames. When you select a frame you want as a keyframe, click **Capture current view** and also set your zoom there. When satisfied with the target cameras (which you can preview with **Auto-follow camera** during playback), click **Export cameras** to write the interpolated camera path to `cam_ui/exported_cameras/output_cameras.npz` (which is customizable in *Output filename*).
 
 Pass the exported `.npz` as `--cam_path` to `render_single.py` instead of the provided cameras in `./media/single/`.
 
@@ -172,7 +172,9 @@ hf download Eyeline-Labs/Vista4D --local-dir ./checkpoints/vista4d
 ```
 If you only need one resolution, pass `--include` to grab just that variant with
 ```bash
-hf download Eyeline-Labs/Vista4D --local-dir ./checkpoints/vista4d --include "384p49_step=30000/*" OR "720p49_step=3000/*"
+# Pick one of the two patterns below.
+hf download Eyeline-Labs/Vista4D --local-dir ./checkpoints/vista4d --include "384p49_step=30000/*"
+hf download Eyeline-Labs/Vista4D --local-dir ./checkpoints/vista4d --include "720p49_step=3000/*"
 ```
 You'll also need the `Wan2.1-T2V-14B` base model. Download it from [Wan-AI/Wan2.1-T2V-14B](https://huggingface.co/Wan-AI/Wan2.1-T2V-14B) into `./checkpoints/wan/Wan2.1-T2V-14B/` with
 ```bash
@@ -196,7 +198,7 @@ USE_USP=true NUM_GPUS=8 EXAMPLE=couple-newspaper RESOLUTION=720p bash scripts/in
 
 ## Evaluation dataset and inference
 
-We provide 110 video-camera pairs to evaluate Vista4D ([`Eyeline-Labs/Vista4D-Eval-Data`](https://huggingface.co/datasets/Eyeline-Labs/Vista4D-Eval-Data)). We select 13 videos from [DAVIS](https://davischallenge.org/) and 38 videos from [Pexels](https://www.pexels.com/). We use [Pi3](https://yyfz.github.io/pi3/) for 4D reconstruction and [Grounded SAM 2](https://github.com/IDEA-Research/Grounded-SAM-2) to do dynamic pixel segmentation. Then, for each video, we hand-design two to three target cameras for each video using our camera UI.
+We provide 110 video-camera pairs to evaluate Vista4D ([`Eyeline-Labs/Vista4D-Eval-Data`](https://huggingface.co/datasets/Eyeline-Labs/Vista4D-Eval-Data)). We select 13 videos from [DAVIS](https://davischallenge.org/) and 38 videos from [Pexels](https://www.pexels.com/). We use [Pi3](https://yyfz.github.io/pi3/) for 4D reconstruction and [Grounded SAM 2](https://github.com/IDEA-Research/Grounded-SAM-2) to do dynamic pixel segmentation. Then, for each video, we hand-design two to three target cameras using our camera UI.
 
 ### Downloading the evaluation dataset
 
@@ -302,7 +304,7 @@ Each edit targets a subset of points via a SAM3 text prompt, and runs one or mor
 - `duplicate`: Clone those points, transform the clone, and add it alongside the originals
 - `insert`: Unproject another scene's recon_and_seg folder, filter with the SAM3 mask, and insert the transformed points into the existing 4D point cloud
 
-`rotate` and `scale` requires a transformation with respect to a centroid, which we compute from the segmented point cloud. Edits can run `global`ly (one centroid over the whole subset) or per `frame` (one centroid per origin frame, so e.g. a per-frame rotation tracks a moving subject). Sky points are excluded from every selection automatically.
+`rotate` and `scale` require a transformation with respect to a centroid, which we compute from the segmented point cloud. Edits can run `global`ly (one centroid over the whole subset) or per `frame` (one centroid per origin frame, so e.g. a per-frame rotation tracks a moving subject). Sky points are excluded from every selection automatically.
 
 ### Edits JSON schema
 
@@ -378,7 +380,7 @@ The cam UI loads DSE reconstructions the same way (enter `./results/dse/$EXAMPLE
 ```bash
 EXAMPLE=lounge-cup RESOLUTION=720p bash scripts/preprocess/example_render_dse.sh
 ```
-The source clip and DSE frames are unprojected together into a single temporally-persistent 4D point cloud, which is then rendered in the target cameras to `./results/dse/$EXAMPLE/render_$RESOLUTION/`. We also provide sample target cameras for each of the provided ten examples in the script under `./media/dse/` which the script automatically loads and renders in. Change `DSE_FRAME_INTERVAL` (default `4`) to subsample DSE frames during unprojection (higher means fewer DSE frames), and `RESOLUTION` and `RENDER_ONLY_NECESSARY` can be configured the same way with single-video rendering.
+The source clip and DSE frames are unprojected together into a single temporally-persistent 4D point cloud, which is then rendered in the target cameras to `./results/dse/$EXAMPLE/render_$RESOLUTION/`. We also provide sample target cameras for each of the provided eight (8) examples in the script under `./media/dse/` which the script automatically loads and renders in. Change `DSE_FRAME_INTERVAL` (default `4`) to subsample DSE frames during unprojection (higher means fewer DSE frames), and `RESOLUTION` and `RENDER_ONLY_NECESSARY` can be configured the same way with single-video rendering.
 
 ### Vista4D inference with DSE
 
