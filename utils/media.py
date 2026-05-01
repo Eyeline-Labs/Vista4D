@@ -7,7 +7,6 @@ import cv2
 import imageio
 import Imath
 from matplotlib import colormaps
-from natsort import natsorted
 import numpy as np
 import numpy.typing as npt
 import OpenEXR
