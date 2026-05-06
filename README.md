@@ -12,7 +12,8 @@
 
 # &#128483; Updates
 
-- **2026/04/23:** Vista4D inference code, model weights, and evaluation dataset have been released!
+- **2026/05/02:** [WanGP](https://github.com/deepbeepmeep/Wan2GP) v11.52 has added Vista4D to their repo! Check it out if you want to run Vista4D with lower VRAM and optionally fewer timesteps &#127950;&#128168;
+- **2026/04/23:** Vista4D inference code, model weights, and evaluation dataset &#128421; have been released!
 - **2026/04/09:** Vista4D has been selected as a Highlight paper &#10024;
 - **2026/02/21:** Vista4D has been accepted to CVPR 2026 &#127881;
 
