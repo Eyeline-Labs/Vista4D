@@ -406,11 +406,13 @@ Moreover, our work is inspired by many awesome prior works such as [TrajectoryCr
 If you use our paper in your research, please cite the following work.
 
 ```bibtex
-@inproceedings{lin2026vista4d,
-    author = {Lin, {Kuan Heng} and Liu, Zhizheng and Salamanca, Pablo and Kant, Yash and Burgert, Ryan and Xu, Yuancheng and Namekata, Koichi and Zhao, Yiwei and Zhou, Bolei and Goldblum, Micah and Debevec, Paul and Yu, Ning},
-    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
-    title = {{Vista4D}: Video Reshooting with 4D Point Clouds},
-    year = {2026}
+@InProceedings{lin2026vista4d,
+    author    = {Lin, {Kuan Heng} and Liu, Zhizheng and Salamanca, Pablo and Kant, Yash and Burgert, Ryan and Xu, Yuancheng and Namekata, Koichi and Zhao, Yiwei and Zhou, Bolei and Goldblum, Micah and Debevec, Paul and Yu, Ning},
+    title     = {{Vista4D}: Video Reshooting with 4D Point Clouds},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2026},
+    pages     = {32671--32682}
 }
 ```
 
