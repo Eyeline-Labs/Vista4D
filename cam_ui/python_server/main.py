@@ -1661,7 +1661,7 @@ async def export_trajectory(request: ExportRequest = None):
         intrinsics_fsff = np.array(intrinsics_fsff_list)
 
     else:
-        print(f"[WARN] FSFF computation failed, using naive frame 0 replacement")
+        print("[WARN] FSFF computation failed, using naive frame 0 replacement")
         cam_c2w_fsff = cam_c2w_output.copy()
         original_frame_0_rot = tf.SO3(scene_data["cameras"][0]["wxyz"]).as_matrix()
         original_frame_0_pos = scene_data["cameras"][0]["position"]

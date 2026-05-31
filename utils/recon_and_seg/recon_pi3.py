@@ -5,7 +5,6 @@ import numpy as np
 import numpy.typing as npt
 from PIL import Image
 import torch
-import torch.nn.functional as F
 import torchvision.transforms as vT
 
 from pi3.models.pi3 import Pi3
@@ -63,7 +62,7 @@ def run_pi3(
             print(*args, **kwargs)
 
     # Run Pi3(X) inference
-    print_verbose(f"Running Pi3(X) inference ...")
+    print_verbose("Running Pi3(X) inference ...")
     frames, (height_new, width_new) = preprocess_frames_pi3(video, pixel_limit=pixel_limit)
     frames = frames.to(dtype=dtype, device=device)
     print_verbose(f"Pi3 processed resolution: {width_new}x{height_new}")
