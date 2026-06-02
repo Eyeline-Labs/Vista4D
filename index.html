@@ -72,7 +72,7 @@
   <title>Vista4D: Video Reshooting with 4D Point Clouds</title>
 
   <!-- Favicon and App Icons -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎥</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="media/favicon.svg">
 
   <!-- Critical CSS - Load synchronously -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
@@ -334,6 +334,16 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Overview</h2>
+      </div>
+    </div>
+    <figure class="image" style="margin-bottom: 1.5rem;">
+      <img src="media/vista4d_poster.jpg" alt="Vista4D CVPR 2026 poster" style="width: 100%;">
+      <figcaption class="has-text-centered" style="margin-top: 0.4rem; font-size: 0.95rem; font-style: italic; color: var(--text-secondary);">
+        Come catch us at <b><a href="https://cvpr.thecvf.com/virtual/2026/poster/38187" target="_blank">CVPR 2026</a></b> in Denver, Colorado around Sunday noon, June 7 (11:45 AM to 1:45 PM MDT), board #377.
+      </figcaption>
+    </figure>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
         <div class="content has-text-justified">
           <p>
             <b>Vista4D</b> is a video reshooting framework which synthesizes the dynamic scene represented by an input source video from novel camera trajectories and viewpoints. We bridge the distribution shift between training and inference for point-cloud-grounded video reshooting, as Vista4D is robust to point cloud artifacts from imprecise 4D reconstruction of real-world videos by training on noisy, reconstructed multiview videos. Our 4D point cloud with temporally-persistent static points also explicitly preserves scene content and improved camera control. Vista4D generalizes to real-world applications such as dynamic scene expansion (casual video capture of scene as background reference), 4D scene recomposition (point cloud editing), and long video inference with memory.
